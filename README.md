@@ -72,3 +72,9 @@ yaelgoede.github.io/
 ## Contact
 
 Connect with me on [LinkedIn](https://www.linkedin.com/in/yael-goede-29b211211/) for professional inquiries and collaborations.
+
+## todo
+### SEO Optimization
+Add meta description and keywords tags
+Include Open Graph meta tags
+Add favicon
