@@ -95,6 +95,18 @@ h3 {
     font-size: 1.1rem;
 }
 
+.personal-statement {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    display: inline-block;
+}
+
+
 .linkedin-button {
     display: inline-flex;
     align-items: center;
