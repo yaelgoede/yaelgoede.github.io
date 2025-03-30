@@ -30,6 +30,15 @@
 </head>
 <body>
     <div class="container">
+        <nav class="nav-bar">
+            <ul>
+                <li><a href="#featured-project">Featured Project</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#experience">Experience</a></li>
+            </ul>
+        </nav>
         <header>
             <img src="images/yael_logo.png" alt="Yael Goede" class="profile-picture">
             <h1>Yael Goede</h1>
@@ -48,7 +57,7 @@
             <div class="header-bg"></div>
         </header>
 
-        <section class="featured-project">
+        <section id="featured-project" class="featured-project">
             <div class="project-card">
                 <div class="project-header">
                     <i class="fas fa-subway project-icon"></i>
@@ -69,7 +78,7 @@
             </div>
         </section>
 
-        <section class="projects">
+        <section id="projects" class="projects">
             <h2>Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
@@ -140,7 +149,7 @@
             </div>
         </section>
 
-        <section class="education">
+        <section id="education" class="education">
             <h2>Education</h2>
             <div class="edu-item">
                 <h3><i class="fas fa-graduation-cap"></i> Bachelor in Computer Sciences</h3>
@@ -161,7 +170,7 @@
             </div>
         </section>
 
-        <section class="certifications">
+        <section id="certifications" class="certifications">
             <h2>Certifications</h2>
             
             <div class="cert-group">
@@ -255,7 +264,7 @@
 
 
 
-        <section class="experience">
+        <section id="experience" class="experience">
             <h2>Work Experience</h2>
             
             <div class="timeline">
@@ -273,6 +282,9 @@
             </div>
         </section>
     </div>
+    <button id="scrollToTop" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     <script>
         function calculateExperience(startDate) {
             const start = new Date(startDate);
@@ -312,5 +324,23 @@
 
         // Initialize with your start date (YYYY-MM-DD format)
         calculateExperience('2022-03-14');
+
+        // Scroll to top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     </script>
 </body>
