@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Databricks CI/CD: Best Practices and Hard-Earned Lessons</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fira-code@6.2.0/distr/fira_code.css">
+</head>
+<body>
+    <nav class="nav-bar">
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <article class="blog-post">
+            <header class="blog-header">
+                <h1>Mastering Databricks CI/CD: Best Practices and Hard-Earned Lessons</h1>
+                <div class="post-meta">March 30, 2025 • DevOps • Data Engineering</div>
+            </header>
+
+            <div class="post-content">
+                <h2>Introduction</h2>
+                <p>Implementing CI/CD for Databricks in production can be challenging – from handling notebook code in Git to automating data pipeline deployments. Unlike traditional applications, Databricks introduces unique elements like notebooks, Delta Live Tables, and Unity Catalog that require a tailored approach.</p>
+                
+                <div class="table-of-contents">
+                    <h3>Quick Navigation</h3>
+                    <ul>
+                        <li><a href="#introduction">Introduction</a></li>
+                        <li><a href="#versioning">Versioning and Deploying Notebooks</a></li>
+                        <li><a href="#automating">Automating Job Deployments</a></li>
+                        <li><a href="#managing">Managing Delta Live Tables in CI/CD</a></li>
+                        <li><a href="#handling">Handling Unity Catalog Configurations</a></li>
+                        <li><a href="#integrating">Integrating with Azure DevOps</a></li>
+                        <li><a href="#leveraging">Leveraging CLI Tools and Terraform</a></li>
+                        <li><a href="#pitfalls">Common Pitfalls and Solutions</a></li>
+                        <li><a href="#conclusion">Conclusion</a></li>
+                    </ul>
+                </div>
+
+                <style>
+                    .table-of-contents {
+                        background: rgba(0, 0, 0, 0.7);
+                        border: 1px solid var(--primary-color);
+                        border-radius: 8px;
+                        padding: 1.5rem;
+                        margin: 2rem 0;
+                        box-shadow: var(--neon-glow);
+                    }
+                    
+                    .table-of-contents h3 {
+                        color: var(--secondary-color);
+                        margin-bottom: 1rem;
+                        font-size: 1.2rem;
+                    }
+                    
+                    .table-of-contents ul {
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                    }
+                    
+                    .table-of-contents li {
+                        margin: 0.5rem 0;
+                    }
+                    
+                    .table-of-contents a {
+                        color: var(--text-color);
+                        text-decoration: none;
+                        transition: all 0.3s ease;
+                        padding: 0.3rem 0.6rem;
+                        border-radius: 4px;
+                    }
+                    
+                    .table-of-contents a:hover {
+                        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+                        color: black;
+                        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+                    }
+                    
+                    @media (max-width: 768px) {
+                        .table-of-contents {
+                            padding: 1rem;
+                        }
+                        
+                        .table-of-contents h3 {
+                            font-size: 1rem;
+                        }
+                    }
+                </style>
+
+                <p>We'll explore best practices and hard-earned lessons for DevOps engineers to master CI/CD on Databricks. We'll cover how to version and deploy notebooks, automate job releases, manage Delta Live Tables (DLT), handle Unity Catalog migrations, integrate with Azure DevOps, and leverage tools like the Databricks CLI, dbx, and Terraform.</p>
+
+                <h2 id="versioning">Versioning and Deploying Notebooks</h2>
+                <p>Managing notebooks as code is a foundational best practice for Databricks CI/CD. Treat notebooks like any source code: keep them in a Git repository and avoid manual edits in production workspaces.</p>
+
+                <div class="best-practices">
+                    <section>
+                        <h3>Best Practices for Notebook Versioning</h3>
+                        <ul>
+                            <li>Use Databricks Repos for Git integration</li>
+                            <li>Prefer source files for collaboration</li>
+                            <li>Isolate environment-specific code</li>
+                            <li>Automate notebook deployment</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <h2 id="automating">Automating Job Deployments</h2>
+                <p>Databricks Jobs (aka Workflows) should be treated as code rather than clicking around in the UI. Define job configurations in JSON or declarative form and store in Git.</p>
+
+                <div class="best-practices">
+                    <section>
+                        <h3>Job Deployment Approaches</h3>
+                        <ul>
+                            <li>Databricks CLI / REST API</li>
+                            <li>Databricks dbx tool</li>
+                            <li>Terraform (Infrastructure as Code)</li>
+                            <li>Asset Bundles (newer CLI)</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <h2 id="managing">Managing Delta Live Tables in CI/CD</h2>
+                <p>Delta Live Tables (DLT) pipelines bring declarative ETL to Databricks and need proper CI/CD practices. Separate development from production pipelines and automate testing.</p>
+
+                <h3>DLT Best Practices</h3>
+                <ul class="benefits-list">
+                    <li>Store pipeline code in Git</li>
+                    <li>Use separate development and production pipelines</li>
+                    <li>Automate testing of DLT pipelines</li>
+                    <li>Promote code through staging to prod</li>
+                </ul>
+
+                <h2 id="handling">Handling Unity Catalog Configurations</h2>
+                <p>Unity Catalog introduces centralized governance for data across Databricks workspaces. Treat catalog setup as code and automate migrations.</p>
+
+                <div class="best-practices">
+                    <section>
+                        <h3>Unity Catalog Management</h3>
+                        <ul>
+                            <li>Design hierarchy with environments in mind</li>
+                            <li>Automate catalog operations with Terraform</li>
+                            <li>Manage permissions via scripts</li>
+                            <li>Plan data migration carefully</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <h2 id="integrating">Integrating with Azure DevOps</h2>
+                <p>Azure DevOps provides build and release pipelines that can orchestrate all Databricks deployment steps.</p>
+
+                <div class="best-practices">
+                    <section>
+                        <h3>Integration Best Practices</h3>
+                        <ul>
+                            <li>Use Service Principals for authentication</li>
+                            <li>Securely manage secrets and configs</li>
+                            <li>Set up pipeline agents with required tools</li>
+                            <li>Design clear pipeline workflows</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <h2 id="leveraging">Leveraging CLI Tools and Terraform</h2>
+                <p>Different tools serve different purposes in Databricks CI/CD:</p>
+
+                <div class="best-practices">
+                    <section>
+                        <h3>Tool Selection Guide</h3>
+                        <ul>
+                            <li>Databricks CLI: Quick automation tasks</li>
+                            <li>dbx: Structured project deployment</li>
+                            <li>Asset Bundles: Native project packaging</li>
+                            <li>Terraform: Infrastructure and metastore management</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <h2 id="pitfalls">Common Pitfalls and Solutions</h2>
+                <ul class="benefits-list">
+                    <li>Bypassing Version Control - enforce Git-backed development</li>
+                    <li>Inconsistent Environments - use configuration as code</li>
+                    <li>Hard-Coded Values - abstract environment specifics</li>
+                    <li>Lack of Testing - implement automated validation</li>
+                    <li>Data Considerations - plan migrations carefully</li>
+                </ul>
+
+                <h2 id="conclusion">Conclusion</h2>
+                <p>Mastering CI/CD for Databricks requires applying software engineering best practices to data notebooks and pipelines. By following these practices and avoiding common pitfalls, you can build reliable, scalable deployment pipelines that accelerate your team's development while maintaining security and stability.</p>
+
+                <p>The key is eliminating manual steps, doubling down on automation, and keeping environments consistent. With proper CI/CD implementation, your team can focus on building great data products while DevOps ensures smooth, reliable deployments.</p>
+            </div>
+        </article>
+    </div>
+
+    <button class="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+    <script>
+        // Show/hide scroll-to-top button based on scroll position
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.querySelector('.scroll-top-btn');
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
