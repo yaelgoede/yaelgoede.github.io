@@ -31,20 +31,26 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0.9);
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(26, 15, 46, 0.95) 100%);
     border-bottom: 2px solid var(--primary-color);
     box-shadow: var(--neon-glow);
     padding: 1rem 0;
     margin-bottom: 2rem;
-    backdrop-filter: blur(10px);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .nav-bar ul {
     list-style: none;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 2rem;
     flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-bar a {
@@ -56,6 +62,7 @@
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
     border-radius: 20px;
+    display: inline-block;
     transition: all 0.3s ease;
 }
 
@@ -68,6 +75,7 @@
 @media (max-width: 768px) {
     .nav-bar ul {
         gap: 1rem;
+        padding: 0.5rem;
     }
     
     .nav-bar a {
@@ -132,7 +140,7 @@ body {
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 2rem 2rem;
     background: rgba(0, 0, 0, 0.7);
     box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
     border: 1px solid var(--primary-color);
@@ -369,7 +377,7 @@ h2 {
 
 @media (max-width: 768px) {
     .container {
-        padding: 1rem;
+        padding: 0 1rem 1rem;
     }
 
     h1 {
