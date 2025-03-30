@@ -53,22 +53,6 @@ cd yaelgoede.github.io
 
 The site is automatically deployed through GitHub Pages when changes are pushed to the main branch. The live version can be accessed at [yaelgoede.github.io](https://yaelgoede.github.io).
 
-## Project Structure
-
-```
-yaelgoede.github.io/
-├── index.html          # Main HTML file
-├── styles.css         # CSS styles
-├── README.md         # Project documentation
-└── images/           # Logo images and photos
-    ├── Achmea_logo.svg
-    ├── Amis_logo.png
-    ├── Eneco_logo.png
-    ├── Eneco_team.jpg
-    ├── NS_logo.png
-    └── Nutreco_logo.png
-```
-
 ## Contact
 
 Connect with me on [LinkedIn](https://www.linkedin.com/in/yael-goede-29b211211/) for professional inquiries and collaborations.
